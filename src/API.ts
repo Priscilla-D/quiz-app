@@ -1,3 +1,5 @@
+import { shuffleArray } from "./utils";
+
 export enum Difficulty {
   EASY = "easy",
   MEDIUM = "medium",
@@ -25,6 +27,9 @@ export const fetchQuestions = async (
 
   return dataFormatted.results.map((question: Question) => ({
     ...question,
-    answers: [...question.incorrect_answers, question.correct_answer],
+    answers: shuffleArray([
+      ...question.incorrect_answers,
+      question.correct_answer,
+    ]),
   }));
 };
